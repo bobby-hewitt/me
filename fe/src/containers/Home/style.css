@@ -1,0 +1,7 @@
+.googleMapsContainer{
+	transition:all 1s ease;
+	opacity:0;
+	&.isLoaded{
+		opacity:1;
+	}
+}
