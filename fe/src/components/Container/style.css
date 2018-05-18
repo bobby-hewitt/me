@@ -1,0 +1,17 @@
+.pageContainer{
+	position: relative;
+	padding:120px;
+	height:200000px;
+}
+
+@media screen and (max-width: 600px){
+	.pageContainer{
+		padding: 50px 10px;
+	}	
+}
+
+@media screen and (max-width: 350px){
+	.pageContainer{
+		padding: 50px 10px;
+	}	
+}
