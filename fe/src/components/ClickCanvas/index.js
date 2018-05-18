@@ -85,6 +85,7 @@ export default class ClickCanvas extends Component {
 		  ctx.translate(this.x, this.y);
 		  ctx.scale(this.scale, this.scale);
 		  ctx.rotate(this.rotation);  
+		  // ctx.fillStyle = 'rgba(16,16,16,' + this.alpha + ')'
 		  ctx.fillStyle = this.random === 0 ? 'rgba(242,49,47,'+this.alpha+')' : this.random ===1 ? 'rgba(34,209,45,'+this.alpha+')':'rgba(42,221,252,'+this.alpha+')' ;
 		  ctx.beginPath();
 		  ctx.arc(0, 0, 1,0, 2 * Math.PI, false);

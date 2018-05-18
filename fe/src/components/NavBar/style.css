@@ -1,3 +1,19 @@
+/*p,h1,h2,h3,h4,h5,h6{
+	font-family: Raleway;
+}*/
+.subNavGrad{
+	width:100%;
+	height:20px;
+	position: fixed;
+	left:0;
+	top:50px;
+	
+	background: linear-gradient(
+		to bottom,
+		rgba(255,255,255,1),
+		rgba(255,255,255,0)
+	);
+}
 .navBarContainer{
 	position: fixed;
 	top:0;
@@ -8,24 +24,30 @@
 	box-sizing: border-box;
 	width:100%;
 	height:50px;
-	background:$lightBlue;
+	background:$white;
 	display: flex;
 	align-items: center;
 	flex-direction: row;
+	z-index: 1000000000000;
 	.nameContainer{
 		.surprises{
-			padding-left:40px;
+			span{
+				opacity:0;
+			}
+			font-famiy:Playfair Display!important;
+			padding-left:60px;
 			z-index: 10000000;
 			position: absolute;
 			bottom:0;
 			left:0;
 			padding-right:10px;
-			text-transform: uppercase;
+			/*text-transform: uppercase;*/
 			opacity:0;
 			overflow: hidden;
 			pointer-events:none;
 			z-index: 100000;
-			color:$white;
+			color:$black;
+
 			margin:0;
 			line-height: 50px;
 		}
@@ -44,17 +66,20 @@
 			bottom:0;
 			position: absolute;
 			width:0%;
+			z-index: 1;
 			height:2px;
 			pointer-events:none;
 		}
 		.nameContentContainer{
-			z-index: 100000!important;
+			z-index: 2;
 			position: absolute;
-			right:40px;
+			right:60px;
 			top:0;
 			height:100%;
 			cursor: pointer;
-			h3{
+			.name{
+				opacity:0.5;
+				margin-right:5px;
 				transition: all 0.1s ease 0.3s;
 				text-align: right;
 			}
@@ -65,40 +90,40 @@
 
 				.animatedBarsContainer{
 					height:20px;
-					opacity:1;
+					opacity:0.51;
 					.bar:nth-child(1) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.3s;
-					   background:red;
+					   /*background:red;*/
 					   width:15px;
 					}
 					.bar:nth-child(2) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.6s;
-					    background:orange;
+					    /*background:orange;*/
 					    width:15px;
 					}
 					.bar:nth-child(3) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.9s;
-					    background:yellow;
+					    /*background:yellow;*/
 					    width:15px;
 					}
 					.bar:nth-child(4) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.2s;
-					    background:green;
+					    /*background:green;*/
 					    width:15px;
 					}
 					.bar:nth-child(5) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.5s;
-					    background:blue;
+					    /*background:blue;*/
 					    width:15px;
 					}
 					.bar:nth-child(6) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.8s;
-					    background:indigo;
+					    /*background:indigo;*/
 					    width:15px;
 					}
 					.bar:nth-child(7) {
 						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)2.1s;
-					    background:violet;
+					    /*background:violet;*/
 					    width:15px;
 					}
 				}
@@ -106,46 +131,58 @@
 					height:200%;
 					
 				}
-				h3{
-					width:0;
+				.name{
+					transition: none;
+					/*width:0;*/
 					opacity:0;
 				}
 				
 				+ div{
 					.surprises{
-						transition: width 0.3s linear 2.7s, opacity 0.3s linear 2.7s;
+						font-size:16px;
+						span:nth-child(1){
+							transition: opacity 0.3s cubic-bezier(.82,.16,.16,.54) 3.0s;
+							opacity:1;
+						}
+						span:nth-child(2){
+
+							transition: opacity 0.3s cubic-bezier(.82,.16,.16,.54) 3.3s;
+							opacity:1;
+						}
+						span:nth-child(3){
+							transition: opacity 0.3s cubic-bezier(.82,.16,.16,.54) 3.3s;
+							opacity:1;
+						}
+						font-famiy:Playfair Display;
+						text-transform:none;
+						transition: width 0.3s cubic-bezier(.82,.16,.16,.54) 2.7s, opacity 0.2s cubic-bezier(.82,.16,.16,.54) 2.8s;
 						width:auto;
 						z-index: 100000000;
-						opacity:1;
+						opacity:0.5;
 					}
 					width:100%;
 					height:100%;
 					transition:width 0.3s cubic-bezier(.82,.16,.16,.54), height 0.3s linear 2.4s;
-					background: linear-gradient(
-						to right,
-						/* rgb(255,253,56), */
-						/* rgb(255,253,56), */
-						$black,
-						$black
-					)
+					background:$lightBlue;
 				}
 			}
 		}
 	}
 	.linkContainer{
 		.link{
+			/*z-index: 1;*/
 			position: relative;
 			display: inline-block;
 			text-transform: uppercase;
 			font-weight: bold;
 			text-decoration: none;
 			/* opacity:0.5; */
-			h3{
-				font-size:12px;
+			.linkText{
+				font-size:16px;
 				color:$black;
 				opacity:0.5;
 				margin:0;
-				padding:22px 30px;
+				padding:22px 40px;
 			}
 			.underline{
 				transition: height 0.3s cubic-bezier(.82,.16,.16,.54);
@@ -158,18 +195,18 @@
 				left:0;	
 			}
 			.underline1{
-				background:rgb(242,49,47);
+				background:$lightBlue;
 			}
 			.underline2{
-				background:rgb(34,209,45);
+				background:$lightBlue;
 			}
 			.underline3{
-				background:rgb(42,221,252);
+				background:$lightBlue;
 			}
 			&:hover, &:active{
-				h3{
+				.linkText{
 					opacity:1;
-					color:$white!important;
+					/*color:$white!important;*/
 					transition: all 0.3s cubic-bezier(.82,.16,.16,.54) 0.25s;
 				}
 				.underline{
@@ -181,11 +218,11 @@
 			
 		}
 	}
-	h3{
-		opacity:0.5;
-		font-size:12px;
+/* 	h3{
+		
+		font-size:16px;
 		text-transform: uppercase
-	}
+	} */
 }
 
 @media screen and (max-width: 600px){
@@ -196,12 +233,16 @@
 				padding-left:20px;
 			}
 			.nameContentContainer{
+
+				span{
+					display:none;
+				}
 				right:20px;
 			}
 		}
 		.linkContainer{
 			.link{
-				h3{
+				.linkText{
 					max-width: 50px;
 					padding:22px 20px;
 				}
@@ -220,11 +261,14 @@
 			}
 			.nameContentContainer{
 				right:10px;
+				span{
+				display:none;
+			}
 			}
 		}
 		.linkContainer{
 			.link{
-				h3{
+				.linkText{
 					max-width: 50px;
 					padding:22px 10px;
 				}
