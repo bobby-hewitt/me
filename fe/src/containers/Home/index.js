@@ -6,6 +6,8 @@ import GoogleMaps from '../GoogleMaps'
 import $ from 'jquery'
 import './style.css'
 import { moves } from '../../Helpers'
+import { LastFM, TitleSection } from '../../components'
+import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homepage'
 import SpotifyPlayer from '../SpotifyPlayer'
 const api = 'http://localhost:9000'
 
@@ -22,49 +24,50 @@ class Home extends Component{
     var self = this;
     let url = '/get-moves'
     $.get(this.props.api + url, function(response){
-      // let data = JSON.parse(response)
-      console.log(response)
       if (response.moves){
         const movesData = response.moves
         moves(movesData).then((d) => {
-          console.log(d)
-          self.setState({
-            places: d[0].places,
-            lines: d[0].lines,
-            activity: d[1]
-          })
+          self.props.setMovesData(d)
         })
       }
       if (response.lastfm){
-        const lastfmData = response.lastfm
+        self.props.setLastFMData(response.lastfm)
       }
       if (response.spotify){
-        self.setState({spotify: response.spotify})
+        self.props.setSpotifyData(response.spotify)
       }
-      
-      // console.log(movesData)
-      // console.log(JSON.parse(lastfmData))
-      // console.log(movesData)
-      
     })
   }
   mapIsLoaded(){
-    this.setState({mapIsLoaded: true})
+    this.timeout = setTimeout(() => {
+      this.setState({mapIsLoaded: true})
+    },500)
   }
+
+  componentWillUnmount(){
+    clearTimeout(this.timeout)
+  }
+
+
+
   render(){
     return(
       <div>
-      {this.state.isRendered &&
-        <div className={this.state.mapIsLoaded ? "googleMapsContainer isLoaded" : "googleMapsContainer"}>
-          {this.state.places && this.state.lines && 
-            <GoogleMaps mapIsLoaded={this.mapIsLoaded.bind(this)} places={this.state.places} lines={this.state.lines}/>
+
+          <div className={this.state.mapIsLoaded ? "googleMapsContainer isLoaded" : "googleMapsContainer"}>
+          {this.props.hpdata.places && this.props.hpdata.lines && 
+            <div>
+            <GoogleMaps mapIsLoaded={this.mapIsLoaded.bind(this)} places={this.props.hpdata.places} lines={this.props.hpdata.lines}/>
+           
+            </div>
           }
-          {this.state.spotify &&
-            <SpotifyPlayer track={this.state.spotify}/>
-          }
-        </div>
-      }
+           <div className={this.state.mapIsLoaded ? "mapLoader isLoaded" : "mapLoader"}>
+            </div>
+          </div>
+          <LastFM />
+        
       
+      <TitleSection color="#ddd"/>
       </div>
     )
   }
@@ -72,11 +75,14 @@ class Home extends Component{
 
 const mapStateToProps = state => ({
   count: state.counter.count,
+  hpdata: state.homepage,
   api: state.setup.api
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  setMovesData,
+  setLastFMData,
+  setSpotifyData
 }, dispatch)
 
 export default connect(

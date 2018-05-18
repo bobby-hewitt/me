@@ -3,3 +3,7 @@ main{
 		color: $primary;
 	}
 }
+
+body{
+	background:$grey0;
+}

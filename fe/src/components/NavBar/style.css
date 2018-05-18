@@ -1,20 +1,39 @@
 /*p,h1,h2,h3,h4,h5,h6{
 	font-family: Raleway;
 }*/
+audio{
+	position: fixed;
+	top:0;
+	left:0;
+	z-index: -1000000;
+	opacity: 0;
+	touch-events:none;
+}
 .subNavGrad{
 	width:100%;
 	height:20px;
 	position: fixed;
 	left:0;
 	top:50px;
-	
 	background: linear-gradient(
-		to bottom,
-		rgba(255,255,255,1),
-		rgba(255,255,255,0)
+	to bottom,
+	rgba(255,255,255,1),
+	rgba(255,255,255,0)
 	);
 }
 .navBarContainer{
+	p{
+		transition:all 0.3s ease;
+		color:$white;
+	}
+	max-width:100vw;
+	.barsContainer{
+		transition:all 0.3s ease;
+		opacity:0;
+		&.canPlay{
+			opacity:1;
+		}
+	}
 	position: fixed;
 	top:0;
 	left:0;
@@ -24,11 +43,16 @@
 	box-sizing: border-box;
 	width:100%;
 	height:50px;
-	background:$white;
+	background:$black;
 	display: flex;
 	align-items: center;
 	flex-direction: row;
 	z-index: 1000000000000;
+
+
+
+
+
 	.nameContainer{
 		.surprises{
 			span{
@@ -41,12 +65,12 @@
 			bottom:0;
 			left:0;
 			padding-right:10px;
-			/*text-transform: uppercase;*/
+			
 			opacity:0;
 			overflow: hidden;
 			pointer-events:none;
 			z-index: 100000;
-			color:$black;
+			color:$white;
 
 			margin:0;
 			line-height: 50px;
@@ -68,6 +92,7 @@
 			width:0%;
 			z-index: 1;
 			height:2px;
+			background:$grey0;
 			pointer-events:none;
 		}
 		.nameContentContainer{
@@ -78,7 +103,7 @@
 			height:100%;
 			cursor: pointer;
 			.name{
-				opacity:0.5;
+				
 				margin-right:5px;
 				transition: all 0.1s ease 0.3s;
 				text-align: right;
@@ -90,50 +115,49 @@
 
 				.animatedBarsContainer{
 					height:20px;
-					opacity:0.51;
+					
 					.bar:nth-child(1) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.3s;
-					   /*background:red;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.8s;
+					   
 					   width:15px;
 					}
 					.bar:nth-child(2) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.6s;
-					    /*background:orange;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.1s;
+					  
 					    width:15px;
 					}
 					.bar:nth-child(3) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)0.9s;
-					    /*background:yellow;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.4s;
+					   
 					    width:15px;
 					}
 					.bar:nth-child(4) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.2s;
-					    /*background:green;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.7s;
+					   
 					    width:15px;
 					}
 					.bar:nth-child(5) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.5s;
-					    /*background:blue;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)2s;
+					   
 					    width:15px;
 					}
 					.bar:nth-child(6) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)1.8s;
-					    /*background:indigo;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)2.3s;
+					   
 					    width:15px;
 					}
 					.bar:nth-child(7) {
-						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)2.1s;
-					    /*background:violet;*/
+						transition:all 0.3s cubic-bezier(.82,.16,.16,.54)2.6s;
+					   
 					    width:15px;
 					}
 				}
 				.bar{
 					height:200%;
-					
 				}
 				.name{
 					transition: none;
-					/*width:0;*/
+					
 					opacity:0;
 				}
 				
@@ -145,7 +169,6 @@
 							opacity:1;
 						}
 						span:nth-child(2){
-
 							transition: opacity 0.3s cubic-bezier(.82,.16,.16,.54) 3.3s;
 							opacity:1;
 						}
@@ -157,30 +180,31 @@
 						text-transform:none;
 						transition: width 0.3s cubic-bezier(.82,.16,.16,.54) 2.7s, opacity 0.2s cubic-bezier(.82,.16,.16,.54) 2.8s;
 						width:auto;
+
 						z-index: 100000000;
-						opacity:0.5;
+						/* opacity:0.5; */
 					}
 					width:100%;
 					height:100%;
 					transition:width 0.3s cubic-bezier(.82,.16,.16,.54), height 0.3s linear 2.4s;
-					background:$lightBlue;
+					/* background:$grey1; */
 				}
 			}
 		}
 	}
 	.linkContainer{
 		.link{
-			/*z-index: 1;*/
+		
 			position: relative;
 			display: inline-block;
 			text-transform: uppercase;
-			font-weight: bold;
+			font-weight: light!important;
 			text-decoration: none;
-			/* opacity:0.5; */
+			
 			.linkText{
 				font-size:16px;
-				color:$black;
-				opacity:0.5;
+				color:$white;
+				
 				margin:0;
 				padding:22px 40px;
 			}
@@ -189,24 +213,16 @@
 				z-index: -1;
 				height:5px;
 				width:0%;
-				background:$black;
+				background:$grey1;
 				position: absolute;
 				bottom:0;
 				left:0;	
 			}
-			.underline1{
-				background:$lightBlue;
-			}
-			.underline2{
-				background:$lightBlue;
-			}
-			.underline3{
-				background:$lightBlue;
-			}
+			
 			&:hover, &:active{
 				.linkText{
 					opacity:1;
-					/*color:$white!important;*/
+					color:$white;
 					transition: all 0.3s cubic-bezier(.82,.16,.16,.54) 0.25s;
 				}
 				.underline{
@@ -228,6 +244,7 @@
 @media screen and (max-width: 600px){
 	.navBarContainer{
 		padding:0;
+		
 		.nameContainer{
 			.surprises{
 				padding-left:20px;
@@ -252,7 +269,7 @@
 }
 
 
-@media screen and (max-width: 350px){
+@media screen and (max-width: 450px){
 	.navBarContainer{
 		padding:0;
 		.nameContainer{

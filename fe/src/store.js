@@ -26,8 +26,6 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-console.log(reducers)
-
 
 const store = createStore(
   reducers,
