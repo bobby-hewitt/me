@@ -12,8 +12,12 @@
 	left:0;
 	width:100%;
 	height:100%;
-	background:$grey0;
+	background:$grey1;
 	&.isLoaded{
 		opacity:0;
 	}
-	}
+}
+
+#homeContainer{
+	padding-bottom: 1000000px;
+}

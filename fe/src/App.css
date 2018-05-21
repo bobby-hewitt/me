@@ -6,4 +6,6 @@ main{
 
 body{
 	background:$grey0;
+	overflow: scroll;
+	height:210000px;
 }

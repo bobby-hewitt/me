@@ -33,13 +33,19 @@ class MapContainer extends Component {
    		var count = 0;
    		this.props.mapIsLoaded()
    		function animateIcon(){
-   			count = (count + 1) % 10000;
-	   		let line = self.refs.line
-	   		var icons = line.polyline.get('icons');
-	   		let offset = count / 100
-	   		icons[0].offset = offset + '%';
-            line.polyline.set('icons', icons);  
-            if (self.state.animating) window.requestAnimationFrame(animateIcon)
+   			if (self.state.animating){
+   				count = (count + 1) % 10000;
+		   		let line = self.refs.line
+		   		var icons = line ? line.polyline.get('icons') : null;
+		   		if(icons){
+		   		let offset = count / 100
+		   		icons[0].offset = offset + '%';
+	            line.polyline.set('icons', icons);  
+   				window.requestAnimationFrame(animateIcon)
+   				}
+   			} 
+   			
+            
    		}
 		animateIcon()
  	}
@@ -66,11 +72,11 @@ class MapContainer extends Component {
 				google={this.props.google} 
 				zoom={12} 
 				styles={mapStyle}
-				zoomControl={true}
+				zoomControl={false}
 				mapTypeControl={false}
 				scaleControl={false}
 				streetViewControl={false}
-				panControl={true}
+				panControl={false}
 				rotateControl={false}
 				initialCenter={{
 					lat:51.517780, lng:-0.052984

@@ -3,3 +3,7 @@ export {default as AnimatedBars} from './AnimatedBars';
 export {default as ClickCanvas} from './ClickCanvas';
 export {default as LastFM} from './LastFM';
 export {default as TitleSection} from './TitleSection';
+export {default as Hero} from './Hero';
+export {default as AnimatedSVG} from './AnimatedSVG';
+export {default as Video} from './Video';
+export {default as Music} from './Music';

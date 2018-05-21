@@ -1,10 +1,13 @@
 .titleSectionContent{
 	/* background:red; */
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 32px;
 	z-index: 100000;
 	width:100%;
 	z-index: 1;
-	min-height:200px;
+	min-height:300px;
 }
 
 .zFix{
@@ -16,22 +19,23 @@
 }
 
 .titleSectionContainer{
+	z-index: 2;
 	position: relative;
-	margin:-30px 0;
+	margin:-50px 0 150px 0;
 }
 
 .angleBottom {
-  width: 100%; 
+  width: 0%; 
   height: 0; 
-  border-top: 100% solid transparent;
-  border-bottom: 30px solid transparent;
-  border-left: 100vw solid;
+  border-top: 0% solid transparent;
+  border-bottom: 50px solid transparent;
+  border-right: 100vw solid;
 }
 
 .angleTop {
-  width: 0%; 
+  width: 1000%; 
   height: 0;
-  border-bottom: 100% solid transparent;
-  border-top: 30px solid transparent;
-  border-right: 100vw solid;
+  border-bottom: 0% solid transparent;
+  border-top: 50px solid transparent;
+  border-left: 100vw solid;
 }

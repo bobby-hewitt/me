@@ -92,7 +92,7 @@ audio{
 			width:0%;
 			z-index: 1;
 			height:2px;
-			background:$grey0;
+			background:$black;
 			pointer-events:none;
 		}
 		.nameContentContainer{
@@ -213,7 +213,7 @@ audio{
 				z-index: -1;
 				height:5px;
 				width:0%;
-				background:$grey1;
+				background:$grey2;
 				position: absolute;
 				bottom:0;
 				left:0;	
