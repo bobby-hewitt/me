@@ -24,21 +24,33 @@ class Home extends Component{
   }
   componentWillMount(){
     var self = this;
-    let url = '/get-moves'
+    let url = '/get-my-data'
     $.get(this.props.api + url, function(response){
-      if (response.moves){
-        const movesData = response.moves
+      console.log(response)
+      if (response[1]){
+        const movesData = response[1]
         moves(movesData).then((d) => {
           self.props.setMovesData(d)
         })
       }
-      if (response.lastfm){
-        self.props.setLastFMData(response.lastfm)
+      if (response[0] && response[0].items && response[0].items.length > 1){
+        let item = self.findFirstPreview(response[0].items)
+        self.props.setSpotifyData({
+          lastTrack: item,
+          tracks: response[0].items
+        })
       }
-      if (response.spotify){
-        self.props.setSpotifyData(response.spotify)
-      }
+
     })
+  }
+
+  findFirstPreview(items){
+    for (var i =0; i < items.length; i++){
+      // console.log(items[0])
+      if (items[i].track.preview_url && items[i].track.preview_url.length){
+        return items[i]
+      }
+    }
   }
   mapIsLoaded(){
     this.timeout = setTimeout(() => {

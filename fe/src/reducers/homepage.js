@@ -1,7 +1,6 @@
 
 const initialState = {
   spotify: null,
-  lastfm: null,
   places: null,
   lines: null,
   activity: null

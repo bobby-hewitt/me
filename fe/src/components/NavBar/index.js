@@ -33,7 +33,7 @@ class NavBar extends Component{
       <div className="navBarContainer" id="nav">
         {this.props.spotify && 
           <audio ref="spotify" loop controls>
-            <source src={this.props.spotify.preview_url} type="audio/mpeg" />
+            <source src={this.props.spotify.lastTrack.track.preview_url} type="audio/mpeg" />
             Your browser does not support the audio tag.
           </audio>
         }
