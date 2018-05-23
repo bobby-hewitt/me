@@ -9,6 +9,8 @@ import { moves } from '../../Helpers'
 import { LastFM, TitleSection } from '../../components'
 import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homepage'
 import SpotifyPlayer from '../SpotifyPlayer'
+import { Parallax } from 'react-scroll-parallax';
+
 const api = 'http://localhost:9000'
 
 class Home extends Component{
@@ -65,9 +67,8 @@ class Home extends Component{
             </div>
           </div>
           <LastFM />
-        
-      
-      <TitleSection color="#ddd"/>
+        <TitleSection color="#ddd" text="hello"/>
+      <div style={{height:'1000000px'}} />
       </div>
     )
   }
