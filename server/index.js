@@ -30,6 +30,7 @@ let PORT = process.env.PORT || 9000
 app.listen(PORT, () => console.log('Example app listening on port ' + PORT))
 
 app.get('/get-my-data', (req, res, next) => {
+	console.log('getting data')
 	Me.findOne({name: 'me'}, function(err, me){
 		if (err) return console.log('No user found')
 		let promises = [getSpotifyData(me), getMovesData(me)]
@@ -143,8 +144,12 @@ function callSpotifyTrackAPI(options, callback){
 		if(!err && response.statusCode === 200){
 			callback(body)
 		} else {
-			console.log(err, response.statusCode)
-			callback(false, response.statusCode === 401)
+			if (err){
+				console.log(err)
+			} else {
+				console.log(response.statusCode)
+			}
+			callback(false, response && response.statusCode === 401)
 		}
 	})
 }

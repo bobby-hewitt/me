@@ -1,4 +1,5 @@
 .world{
+	vertical-align: center;
 	svg path{
 		color:red;
 		stroke:$grey3;

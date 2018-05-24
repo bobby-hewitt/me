@@ -38,7 +38,7 @@ class SVG extends Component {
 	}
 
 	animateIn(){
-
+		console.log('animating in')
 		let path = this.refs.svg
 		path.style.transition = path.style.transition ='fill-opacity 0.3s ease,stroke-dashoffset 10s ease';
 		path.style.strokeDashoffset = '0';

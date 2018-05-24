@@ -27,8 +27,8 @@ class WorldMap extends Component {
    render() {
      
    return(
-      <div className="world">
-      <svg viewBox="0 0 1000 450">
+      <div className="world section">
+      <svg width="100%" viewBox="0 0 1000 450">
          {this.createMap()}
       </svg>
       </div>

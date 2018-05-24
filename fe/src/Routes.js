@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
-import { push } from 'react-router-redux'
+import { Route, Link,  withRouter } from 'react-router-dom'
+import { push, } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Home from './containers/Home'
 import About from './containers/About'
-import { NavBar, ClickCanvas } from './components'
+import { NavBar, ClickCanvas, Loader } from './components'
+
 import styles from './App.css'
 
 class Routes extends Component{ 
@@ -35,7 +36,7 @@ class Routes extends Component{
     return(
       <div>
         <header style={{zIndex:1000000000000}}>
-          <NavBar />
+          <NavBar location={this.props.location}/>
         </header>
         <main>
           <div className="container">
@@ -44,13 +45,15 @@ class Routes extends Component{
           <Route exact path="/about" component={About} />
           </div>
         </main>
+        <Loader loading={this.props.loading}/>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  scrollCheck: state.ui.scrollCheck
+  scrollCheck: state.ui.scrollCheck,
+  loading: state.ui.loading
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -58,7 +61,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Routes)
+)(Routes))

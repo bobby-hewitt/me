@@ -1,0 +1,16 @@
+.loaderContainer{
+	transition:transform 0.5s ease;
+	position: fixed;
+	top:50px;
+	left:0;
+	width:100%;
+	height:100%;
+	transform:translateY(100%);
+	background: $black;
+	z-index: 100000000!important;
+	&.isMounted{
+		transform:translateY(0);
+		width:100%;
+		height:100%;
+	}
+}

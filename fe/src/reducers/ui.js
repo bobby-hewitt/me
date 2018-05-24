@@ -1,6 +1,7 @@
 
 const initialState = {
-  scrollCheck: []
+  scrollCheck: [],
+  loading: true
 }
 
 export default (state = initialState, action) => {
@@ -15,6 +16,16 @@ export default (state = initialState, action) => {
       ...state,
       scrollCheck: elems,
 
+    }
+    case 'BEGIN_LOAD':
+    return {
+      ...state,
+      loading: true,
+    }
+    case 'END_LOAD':
+    return {
+      ...state,
+      loading: false,
     }
     default:
       return state

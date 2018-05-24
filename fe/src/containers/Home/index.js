@@ -8,6 +8,7 @@ import './style.css'
 import { moves } from '../../Helpers'
 import { LastFM, TitleSection, Hero, AnimatedSVG, Video, Music, FitSquare, WorldMap } from '../../components'
 import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homepage'
+import { endLoad } from '../../actions/ui'
 import SpotifyPlayer from '../SpotifyPlayer'
 import { heyImBobby, myWeek, mapMyWeek } from '../../svg'
 
@@ -25,25 +26,28 @@ class Home extends Component{
   }
   componentWillMount(){
     var self = this;
+    if (!this.props.hpdata.lines || !this.props.hpdata.places || !this.props.hpdata.spotify.lastTrack){
     let url = '/get-my-data'
-    $.get(this.props.api + url, function(response){
-      console.log(response)
-      if (response[1]){
-        const movesData = response[1]
-        moves(movesData).then((d) => {
-          self.props.setMovesData(d)
-        })
-      }
-      if (response[0] && response[0].items && response[0].items.length > 1){
-        let item = self.findFirstPreview(response[0].items)
-        self.props.setSpotifyData({
-          lastTrack: item,
-          tracks: response[0].items
-        })
+      $.get(this.props.api + url, function(response){
 
-      }
-
-    })
+        if (response[0] && response[0].items && response[0].items.length > 1){
+          let item = self.findFirstPreview(response[0].items)
+          self.props.setSpotifyData({
+            lastTrack: item,
+            tracks: response[0].items
+          })
+        }
+        if (response[1]){
+          const movesData = response[1]
+          moves(movesData).then((d) => {
+            self.props.setMovesData(d)
+          })
+        } else {
+          this.props.endLoad()
+        }
+        
+      })
+    }
   }
 
   findFirstPreview(items){
@@ -56,8 +60,10 @@ class Home extends Component{
   }
   mapIsLoaded(){
     this.timeout = setTimeout(() => {
+      console.log('loaddddddd')
+      this.props.endLoad()
       this.setState({mapIsLoaded: true})
-    },500)
+    },1000)
   }
 
   componentWillUnmount(){
@@ -85,17 +91,17 @@ class Home extends Component{
         </div>
         <LastFM />
         <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
+          <AnimatedSVG  color="#ddd" vbw="240" path={myWeek} width="400"/>
         </TitleSection>
         <FitSquare />
         <FitSquare />
         <FitSquare />
         <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
+          <AnimatedSVG  color="#ddd" vbw="240" path={myWeek} width="400"/>
         </TitleSection>
         <WorldMap/>
         <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
+          <AnimatedSVG  color="#ddd" vbw="240"path={myWeek} width="400"/>
         </TitleSection>
       </div>
     )
@@ -110,6 +116,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setMovesData,
+  endLoad,
   setLastFMData,
   setSpotifyData
 }, dispatch)

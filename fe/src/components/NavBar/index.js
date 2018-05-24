@@ -5,6 +5,7 @@ import AnimatedBars from '../AnimatedBars'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { beginLoad, endLoad } from '../../actions/ui'
 import SpotifyPlayer from '../../containers/SpotifyPlayer'
 
 class NavBar extends Component{
@@ -16,12 +17,6 @@ class NavBar extends Component{
     }
   }
 
-  componentWillMount(){
-    setInterval(() => {
-      console.log(this.props)
-    })
-  }
-
   play(){
     if (this.refs.spotify){
       this.refs.spotify.play()
@@ -31,6 +26,19 @@ class NavBar extends Component{
   stop(){
     if (this.refs.spotify){
       this.refs.spotify.pause()
+    }
+  }
+
+  onNavigate(path){
+    console.log(this.props)
+    if (path !== this.props.location.pathname){
+      this.props.beginLoad()
+      setTimeout(() => {
+        setTimeout(() => {
+          this.props.endLoad()     
+        },1000)
+           this.props.push(path)   
+      }, 650)
     }
   }
 
@@ -56,31 +64,36 @@ class NavBar extends Component{
           </div>
         </div>
         <div className="linkContainer">
-          <NavLink className="link" to="/">
+          <div className="link" onClick={this.onNavigate.bind(this, '/')}>
             <div className="underline underline1" />
             <p className="linkText">Test1</p>
-          </NavLink>
-          <NavLink className="link" to="/about">
-            <div className="underline underline2" />
-            <p className="linkText">Test2</p> 
-          </NavLink>
-          <NavLink className="link" to="/about">
-            <div className="underline underline3" />
-            <p className="linkText">Test3</p> 
-          </NavLink>
+          </div>
+          <div className="link" onClick={this.onNavigate.bind(this, '/path2')}>
+            <div className="underline underline1" />
+            <p className="linkText">Test2</p>
+          </div>
+          <div className="link" onClick={this.onNavigate.bind(this, '/path3')}>
+            <div className="underline underline1" />
+            <p className="linkText">Test3</p>
+          </div>
+
         </div>
       </div>
+
     )
   }
 } 
 const mapStateToProps = state => ({
   count: state.counter.count,
   spotify: state.homepage.spotify,
-  api: state.setup.api
+  api: state.setup.api,
+  loading: state.ui.loading
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  push: path => push(path),
+  beginLoad,
+  endLoad
 }, dispatch)
 
 export default connect(
