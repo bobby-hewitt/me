@@ -11,6 +11,7 @@ import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homep
 import SpotifyPlayer from '../SpotifyPlayer'
 import { heyImBobby, myWeek, mapMyWeek } from '../../svg'
 
+
 const api = 'http://localhost:9000'
 
 class Home extends Component{
@@ -24,22 +25,34 @@ class Home extends Component{
   }
   componentWillMount(){
     var self = this;
-    let url = '/get-moves'
+    let url = '/get-my-data'
     $.get(this.props.api + url, function(response){
-      if (response.moves){
-        const movesData = response.moves
+      console.log(response)
+      if (response[1]){
+        const movesData = response[1]
         moves(movesData).then((d) => {
           self.props.setMovesData(d)
         })
       }
-      if (response.lastfm){
-        // console.log(response.lastfm.recenttracks.track.slice(0,3))
-        self.props.setLastFMData(response.lastfm.recenttracks.track.slice(0,5))
+      if (response[0] && response[0].items && response[0].items.length > 1){
+        let item = self.findFirstPreview(response[0].items)
+        self.props.setSpotifyData({
+          lastTrack: item,
+          tracks: response[0].items
+        })
+
       }
-      if (response.spotify){
-        self.props.setSpotifyData(response.spotify)
-      }
+
     })
+  }
+
+  findFirstPreview(items){
+    for (var i =0; i < items.length; i++){
+      // console.log(items[0])
+      if (items[i].track.preview_url && items[i].track.preview_url.length){
+        return items[i]
+      }
+    }
   }
   mapIsLoaded(){
     this.timeout = setTimeout(() => {
@@ -68,6 +81,7 @@ class Home extends Component{
           }
           <div className={this.state.mapIsLoaded ? "mapLoader isLoaded" : "mapLoader"}>
           </div>
+
         </div>
         <LastFM />
         <TitleSection color="#ddd" >

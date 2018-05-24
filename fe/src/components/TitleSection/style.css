@@ -1,4 +1,10 @@
+.zOnTop{
+	z-index: 100000000;
+
+}
+
 .titleSectionContent{
+
 	/* background:red; */
 	display: flex;
 	align-items: center;
@@ -19,9 +25,10 @@
 }
 
 .titleSectionContainer{
+	/* transform: translateY(-100%); */
 	z-index: 2;
 	position: relative;
-	margin:-50px 0 150px 0;
+	/* margin:-50px 0 150px 0; */
 }
 
 .angleBottom {

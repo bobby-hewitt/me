@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './style.css'
+
 var requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
 
 
@@ -15,16 +16,23 @@ export default class ClickCanvas extends Component {
 		var ctx = c.getContext('2d');
 		var cw = c.width = window.innerWidth;
 		var ch = c.height = window.innerHeight;
-
-
-		var requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
-		var rand = function(a,b){return ~~((Math.random()*(b-a+1))+a);}
 		var circles = [];
-		var circlesCount = 30;
-
+		var requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
+	var rand = function(a,b){return ~~((Math.random()*(b-a+1))+a);}
+	
+	var circlesCount = 30;
+		// let Circles = new CircleClass(ctx)		
+		// console.log(CircleClass)
 		nav.onmousedown=function(e){
-		  	playCircles(e)
+
+			// console.log(Circles)
+			// Circles.loop()
+			playCircles(e)
+
+			// console.log(Circles)
+			
 	  	}
+
 
 	  	function playCircles(e){
 	  		var obj = {

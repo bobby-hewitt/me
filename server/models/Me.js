@@ -7,7 +7,8 @@ var Me = new Schema({
 	refresh_token: '',
 	token_type: '',
 	expires_in: '',
-	refresh_token: '',
+	spotify_refresh_token: '',
+	spotify_access_token: '',
 	user_id: '' 
 });
  

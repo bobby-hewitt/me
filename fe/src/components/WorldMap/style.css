@@ -12,7 +12,7 @@
 			fill:$grey2;
 		}	
 	}	
-	&:hover{
+	/* &:hover{
 		svg{
 			background:darkBlue;
 		}
@@ -20,7 +20,7 @@
 		color:red;
 		stroke:$grey3;
 		fill:$white;
-		/* fill:blue; */
+		fill:blue;
 		transition: all 0.3s ease;
 		&.isVisited{
 			fill:green;
@@ -28,8 +28,8 @@
 		&.isBooked{
 			fill:$black;
 		}	
-	}	
-	}
+	}	 */
+	/* } */
 }
 
 .world svg{
