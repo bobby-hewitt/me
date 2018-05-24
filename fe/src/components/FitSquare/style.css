@@ -1,0 +1,16 @@
+.fitSquareContainer{
+	width:33.333333% ;
+	display: inline-block;
+	padding-top:33.333333%;
+	background: $grey0;
+
+}
+
+@media screen and (max-width: 600){
+	.fitSquareContainer{
+		display: block;
+		width:100%;
+		padding-top: 100%;
+		background: blue!important;
+	}
+}

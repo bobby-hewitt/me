@@ -270,6 +270,9 @@ audio{
 
 
 @media screen and (max-width: 450px){
+	.fitSquareContainer{
+		background: blue;
+	}
 	.navBarContainer{
 		padding:0;
 		.nameContainer{

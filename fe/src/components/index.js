@@ -7,3 +7,5 @@ export {default as Hero} from './Hero';
 export {default as AnimatedSVG} from './AnimatedSVG';
 export {default as Video} from './Video';
 export {default as Music} from './Music';
+export {default as FitSquare} from './FitSquare';
+export {default as WorldMap} from './WorldMap';

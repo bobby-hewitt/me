@@ -6,7 +6,7 @@ import GoogleMaps from '../GoogleMaps'
 import $ from 'jquery'
 import './style.css'
 import { moves } from '../../Helpers'
-import { LastFM, TitleSection, Hero, AnimatedSVG, Video, Music } from '../../components'
+import { LastFM, TitleSection, Hero, AnimatedSVG, Video, Music, FitSquare, WorldMap } from '../../components'
 import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homepage'
 import SpotifyPlayer from '../SpotifyPlayer'
 import { heyImBobby, myWeek, mapMyWeek } from '../../svg'
@@ -58,7 +58,7 @@ class Home extends Component{
       <div id="homeContainer">
         <Hero />
         <TitleSection color="#ddd" >
-          <AnimatedSVG path={mapMyWeek} color="#ddd" vbw="180" width="300" autoAnimate/>
+          <AnimatedSVG color="#ddd" vbw="180" width="300" autoAnimate/>
         </TitleSection>
         <div className={this.state.mapIsLoaded ? "googleMapsContainer isLoaded" : "googleMapsContainer"}>
           {this.props.hpdata.places && this.props.hpdata.lines && 
@@ -71,9 +71,18 @@ class Home extends Component{
         </div>
         <LastFM />
         <TitleSection color="#ddd" >
-          <AnimatedSVG path={myWeek} color="#ddd" vbw="240" width="400"/>
+          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
         </TitleSection>
-        <Music />
+        <FitSquare />
+        <FitSquare />
+        <FitSquare />
+        <TitleSection color="#ddd" >
+          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
+        </TitleSection>
+        <WorldMap/>
+        <TitleSection color="#ddd" >
+          <AnimatedSVG  color="#ddd" vbw="240" width="400"/>
+        </TitleSection>
       </div>
     )
   }

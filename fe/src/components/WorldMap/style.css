@@ -1,0 +1,38 @@
+.world{
+	svg path{
+		color:red;
+		stroke:$grey3;
+		fill:$grey1;
+		/* fill:blue; */
+		transition: all 0.3s ease;
+		&.isVisited{
+			fill:$grey3;
+		}
+		&.isBooked{
+			fill:$grey2;
+		}	
+	}	
+	&:hover{
+		svg{
+			background:darkBlue;
+		}
+		svg path{
+		color:red;
+		stroke:$grey3;
+		fill:$white;
+		/* fill:blue; */
+		transition: all 0.3s ease;
+		&.isVisited{
+			fill:green;
+		}
+		&.isBooked{
+			fill:$black;
+		}	
+	}	
+	}
+}
+
+.world svg{
+
+}
+
