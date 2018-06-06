@@ -8,7 +8,7 @@ class Hero extends Component {
 
 	render(){
 		return(
-			<div className="fitSquareContainer">
+			<div className={this.props.col ? "fitSquareContainer" + this.props.col : "fitSquareContainer" }>
 				{this.props.children}
 			</div>
 		)

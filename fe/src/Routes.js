@@ -7,6 +7,7 @@ import Home from './containers/Home'
 import About from './containers/About'
 import { NavBar, ClickCanvas, Loader } from './components'
 
+
 import styles from './App.css'
 
 class Routes extends Component{ 
@@ -24,12 +25,16 @@ class Routes extends Component{
   }
 
   isScrolledIntoView(el) {
+    if (el){
     el = el.ref
     var rect = el.getBoundingClientRect();
     var elemTop = rect.top;
     var elemBottom = rect.bottom;
     var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
     return isVisible;
+    } else {
+      return false
+    }
   }
 
   render(){

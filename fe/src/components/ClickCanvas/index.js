@@ -33,6 +33,7 @@ export default class ClickCanvas extends Component {
 		var squaresCount = 1
 		//animation initiations
 		nav.onmousedown=function(e){
+			console.log('eh')
 			playCircles(e)		
 	  	}
 	  	
@@ -47,65 +48,7 @@ export default class ClickCanvas extends Component {
 		var renderCircles = function(){if (circles.length > 0){for (var i =0; i < circles.length; i++){for (var j = 0; j < circles[i].circles.length; j++){circles[i].circles[j].render(); }; }; }; };
 		//loop
 
-		var Square = function(){
-			this.init();
-		}
-
-		Square.prototype.init = function(){
-			this.height = ch;
-			this.width = cw;
-			this.fill = 'rgb(255,0,0)';
-			this.size = 0;
-			this.y = 0;
-			this.vSize = 20;
-			this.vy = 0;
-		}
-
-		Square.prototype.update = function(){
-			// console.log('updating')
-			this.size += this.vSize
-		}
-
-		Square.prototype.render = function(){
-			// ctx.save()
-			
-			ctx.beginPath();
-    		ctx.rect(cw/2, cw/2, this.size, Math.PI*-2, Math.PI * 2, true); // Outer circle
-    		ctx.fill();
-			
-			// ctx.restore()
-		}
-		var createSquares = () => {
-			for (var i =0; i < squaresCount; i++){
-				squares.push(new Square())
-			}
-
-		}
-		var updateSquares = () => {
-			// console.log('updating')
-			if (squares.length > 0){
-				for (var i = 0; i < squares.length; i++){
-					squares[i].update(i)
-				}
-			}
-		}
-		var renderSquares = () => {
-			if (squares.length > 0){
-				for (var i = 0; i < squares.length; i++){
-					squares[i].render(i)
-				}
-			}
-		}
-
-		// createSquares()
-
-		function animateLoadIn(){
-			
-		}
-
-		function animateLoadOut(){
-
-		}
+		
 
 		var loop = function(){
 			requestAnimFrame(loop);
@@ -114,10 +57,7 @@ export default class ClickCanvas extends Component {
 				updateCircles();
 				renderCircles();
 			}
-			if (squares.length > 0){
-				updateSquares();
-				renderSquares();
-			}
+			
 		}
 		loop()
 	}

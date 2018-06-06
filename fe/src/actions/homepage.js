@@ -1,6 +1,5 @@
 
 export const setMovesData = (payload) => {
-  console.log('calling moves')
   return dispatch => {
     dispatch({
       type: 'SET_MOVES_DATA',
@@ -8,9 +7,25 @@ export const setMovesData = (payload) => {
     })
   }
 }
+export const setHomepage = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_HOMEPAGE',
+      payload: payload
+    })
+  }
+}
+
+export const setCurrentlyPlaying = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_CURRENTLY_PLAYING',
+      payload: payload
+    })
+  }
+}
 
 export const setLastFMData = (payload) => {
-  console.log('calling last')
   return dispatch => {
     dispatch({
       type: 'SET_LASTFM_DATA',
@@ -20,7 +35,6 @@ export const setLastFMData = (payload) => {
 }
 
 export const setSpotifyData = (payload) => {
-  console.log('calling ')
   return dispatch => {
     dispatch({
       type: 'SET_SPOTIFY_DATA',

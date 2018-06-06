@@ -21,6 +21,18 @@ audio{
 	rgba(255,255,255,0)
 	);
 }
+
+.navAngleBottom {
+	position: absolute;
+	top:50px;
+  width: 0%; 
+  z-index: -1;
+  height: 0; 
+  border-top: 0% solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 100vw solid $black;
+}
+
 .navBarContainer{
 	p{
 		transition:all 0.3s ease;
@@ -99,7 +111,7 @@ audio{
 			z-index: 2;
 			position: absolute;
 			right:60px;
-			top:0;
+			top:5px;
 			height:100%;
 			cursor: pointer;
 			.name{
@@ -194,7 +206,7 @@ audio{
 	}
 	.linkContainer{
 		.link{
-		
+		z-index: 100000;
 			position: relative;
 			display: inline-block;
 			text-transform: uppercase;

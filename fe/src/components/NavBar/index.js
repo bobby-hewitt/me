@@ -5,7 +5,7 @@ import AnimatedBars from '../AnimatedBars'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { beginLoad, endLoad } from '../../actions/ui'
+import { beginLoad, endLoad, clearScrollCheck } from '../../actions/ui'
 import SpotifyPlayer from '../../containers/SpotifyPlayer'
 
 class NavBar extends Component{
@@ -30,8 +30,10 @@ class NavBar extends Component{
   }
 
   onNavigate(path){
-    console.log(this.props)
+
+
     if (path !== this.props.location.pathname){
+      this.props.clearScrollCheck()
       this.props.beginLoad()
       setTimeout(() => {
         setTimeout(() => {
@@ -78,6 +80,7 @@ class NavBar extends Component{
           </div>
 
         </div>
+        <div className="navAngleBottom" />
       </div>
 
     )
@@ -92,6 +95,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   push: path => push(path),
+  clearScrollCheck,
   beginLoad,
   endLoad
 }, dispatch)

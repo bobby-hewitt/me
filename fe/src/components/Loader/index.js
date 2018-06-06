@@ -34,7 +34,7 @@ class Loader extends Component {
 	render(){
 		let cn = "loaderContainer"
 		if (this.state.isMounted) cn += ' isMounted'
-			console.log(cn)
+		
 		return(
 			<div className={cn}>
 				

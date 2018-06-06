@@ -1,0 +1,113 @@
+.songController{
+	overflow: hidden!important;
+	background:$grey2;
+}
+
+.songBackground{
+	background:red;
+
+}
+.songContainer{
+	.diskCenter{
+		transition:none;
+		opacity: 0;
+	}
+	transition:all 0.3s ease;
+	display: flex;
+	cursor: pointer;
+	flex:1;
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width: 100%;
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+	div{
+		transition:all 0.3s ease;
+		height:100%;
+		width:100%;
+		background-position: center;
+		background-size: cover;
+	}
+	&.isPlaying{
+		.diskCenter{
+			opacity: 1;
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
+			&.diskCenter1{
+				width:50px;
+				height:50px;
+				background:$grey1;
+			}
+			&.diskCenter2{
+				width:40px;
+				height:40px;
+				background:$white;
+			}
+			&.diskCenter3{
+				width:10px;
+				height:10px;
+				background:$grey1;
+			}
+		}
+	 	div{
+			transform:scale(0.9);
+	    	border-radius:50%;
+	    }
+	 	-webkit-filter: none; /* Safari 6.0 - 9.0 */
+	    filter: none;
+	    animation-name: rotate;
+	    animation-iteration-count: infinite;
+	    animation-timing-function: linear;
+	    animation-duration: 4s;
+	 }
+}
+
+.animatedBarsContainer{
+	position: absolute;
+	bottom:10px;
+	right:10px;
+	max-height:20px;
+}
+
+.songNeedle{
+	opacity: 0;
+	transition: transform 0.8s ease 0.3s, opacity 0s ease;
+	position: absolute;
+	top:0;
+	right:0;
+	width:7px;
+	height:60%;
+	background:#111;
+	box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+	div{
+		position: absolute;
+		bottom:-35px;
+		right:0;
+		width:15px;
+		height:35px;
+		background: #111;
+		background:$grey0;
+		box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+	}
+	&.isActive{
+		opacity:1;
+		transform: rotate(15deg) translateX(-10px);
+	}
+}
+
+
+@keyframes rotate {
+    from {
+    	transform:rotate(0deg);
+    	-webkit-transform:rotate(0deg)
+    }
+    to {
+    	transform:rotate(360deg);
+    	-webkit-transform:rotate(360deg)
+    }
+}

@@ -6,8 +6,8 @@ import GoogleMaps from '../GoogleMaps'
 import $ from 'jquery'
 import './style.css'
 import { moves } from '../../Helpers'
-import { LastFM, TitleSection, Hero, AnimatedSVG, Video, Music, FitSquare, WorldMap } from '../../components'
-import { setMovesData, setLastFMData, setSpotifyData } from '../../actions/homepage'
+import { RecentSongs, Activity, TitleSection, Hero, AnimatedSVG, Video, Music, FitSquare, WorldMap } from '../../components'
+import { setMovesData, setLastFMData, setSpotifyData, setHomepage } from '../../actions/homepage'
 import { endLoad } from '../../actions/ui'
 import SpotifyPlayer from '../SpotifyPlayer'
 import { heyImBobby, myWeek, mapMyWeek } from '../../svg'
@@ -26,26 +26,13 @@ class Home extends Component{
   }
   componentWillMount(){
     var self = this;
-    if (!this.props.hpdata.lines || !this.props.hpdata.places || !this.props.hpdata.spotify.lastTrack){
-    let url = '/get-my-data'
+    if (!this.props.hpdata.lines || !this.props.hpdata.places || !this.props.hpdata.lastTrack){
+    let url = '/homedata'
       $.get(this.props.api + url, function(response){
-
-        if (response[0] && response[0].items && response[0].items.length > 1){
-          let item = self.findFirstPreview(response[0].items)
-          self.props.setSpotifyData({
-            lastTrack: item,
-            tracks: response[0].items
-          })
-        }
-        if (response[1]){
-          const movesData = response[1]
-          moves(movesData).then((d) => {
-            self.props.setMovesData(d)
-          })
-        } else {
-          this.props.endLoad()
-        }
-        
+        self.props.setHomepage(response)
+        self.loadTimeout = setTimeout(() => {
+          self.props.endLoad()
+        },1000)  
       })
     }
   }
@@ -60,7 +47,6 @@ class Home extends Component{
   }
   mapIsLoaded(){
     this.timeout = setTimeout(() => {
-      console.log('loaddddddd')
       this.props.endLoad()
       this.setState({mapIsLoaded: true})
     },1000)
@@ -68,6 +54,7 @@ class Home extends Component{
 
   componentWillUnmount(){
     clearTimeout(this.timeout)
+    clearTimeout(this.loadTimeout)
   }
 
 
@@ -75,9 +62,12 @@ class Home extends Component{
   render(){
     return(
       <div id="homeContainer">
-        <Hero />
-        <TitleSection color="#ddd" >
-          <AnimatedSVG color="#ddd" vbw="180" width="300" autoAnimate/>
+        <Hero >
+          <Video />
+        </Hero>
+
+        <TitleSection color="#111" >
+          <AnimatedSVG color="#111" vbw="180" width="300" path={mapMyWeek} autoAnimate/>
         </TitleSection>
         <div className={this.state.mapIsLoaded ? "googleMapsContainer isLoaded" : "googleMapsContainer"}>
           {this.props.hpdata.places && this.props.hpdata.lines && 
@@ -85,23 +75,30 @@ class Home extends Component{
               <GoogleMaps mapIsLoaded={this.mapIsLoaded.bind(this)} places={this.props.hpdata.places} lines={this.props.hpdata.lines}/>
             </div>
           }
+          <div className="mapGrad" />
           <div className={this.state.mapIsLoaded ? "mapLoader isLoaded" : "mapLoader"}>
           </div>
-
         </div>
-        <LastFM />
-        <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240" path={myWeek} width="400"/>
+        <TitleSection color="#111" >
+          <AnimatedSVG  color="#111" vbw="240" path={myWeek} width="400"/>
         </TitleSection>
-        <FitSquare />
-        <FitSquare />
-        <FitSquare />
-        <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240" path={myWeek} width="400"/>
+         <RecentSongs />
+         <TitleSection color="#111" >
+          <AnimatedSVG  color="#111" vbw="240" path={myWeek} width="400"/>
+        </TitleSection>
+        <Activity/>
+        <TitleSection color="#111" >
+          <AnimatedSVG  color="#111" vbw="240" path={myWeek} width="400"/>
         </TitleSection>
         <WorldMap/>
-        <TitleSection color="#ddd" >
-          <AnimatedSVG  color="#ddd" vbw="240"path={myWeek} width="400"/>
+        
+        <TitleSection color="#111" >
+          <AnimatedSVG  color="#111" vbw="180" width="300" path={mapMyWeek}/>
+        </TitleSection>
+       
+        
+        <TitleSection color="#111" >
+          <AnimatedSVG  color="#111" vbw="240"path={myWeek} width="400"/>
         </TitleSection>
       </div>
     )
@@ -118,7 +115,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setMovesData,
   endLoad,
   setLastFMData,
-  setSpotifyData
+  setSpotifyData,
+  setHomepage
 }, dispatch)
 
 export default connect(

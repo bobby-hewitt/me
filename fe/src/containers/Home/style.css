@@ -1,7 +1,7 @@
 .googleMapsContainer{
 	position: relative;
 	height:70vh;
-	margin-bottom:-100px;
+	/* margin-bottom:-100px; */
 	/* z-index: 1; */
 }
 
@@ -18,6 +18,20 @@
 	}
 }
 
+.mapGrad{
+	position: absolute;
+	bottom:0;
+	left:0;
+	height:200px;
+	background: linear-gradient(
+		to bottom,
+		rgba(16,16,16,0),
+		rgba(16,16,16,1),
+		rgba(16,16,16,1)
+	);
+	width:100%;
+}
+
 #homeContainer{
-	padding-bottom: 1000000px;
+	/* padding-bottom: 1000000px; */
 }

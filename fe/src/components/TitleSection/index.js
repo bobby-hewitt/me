@@ -14,9 +14,10 @@ class TitleSection extends Component {
 	
 				<div className="titleSectionContainer">
 					<div className="zFix">
-						<div className="angleTop" style={{borderLeftColor:this.props.color}}/>
+						
 							<div className="titleSectionContent" style={{background:this.props.color}}>
 								{this.props.text}
+								{this.props.children}
 							</div>
 						<div className="angleBottom" style={{borderRightColor:this.props.color}}/>
 					</div>

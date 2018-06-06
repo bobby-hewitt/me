@@ -17,6 +17,13 @@ export default (state = initialState, action) => {
       scrollCheck: elems,
 
     }
+    case 'CLEAR_SCROLL_CHECK':
+    // console.log(state)
+    return {
+      ...state,
+      scrollCheck: [],
+
+    }
     case 'BEGIN_LOAD':
     return {
       ...state,

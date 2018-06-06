@@ -8,6 +8,14 @@ export const addElemToScrollCheck = (payload) => {
   }
 }
 
+export const clearScrollCheck = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'ADD_ELEM_TO_SCROLL_CHECK'
+    })
+  }
+}
+
 export const beginLoad = (payload) => {
 	console.log('calling')
   return dispatch => {

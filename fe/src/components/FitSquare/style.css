@@ -1,16 +1,58 @@
 .fitSquareContainer{
-	width:33.333333% ;
-	display: inline-block;
+	width:25% ;
+	/* display: inline-block; */
+	float: left;
+	padding-top:25%;
+	/* background: $grey0; */
+	position: relative
+}
+
+.fitSquareContainer3{
+	width:33.3333333% ;
+	/* display: inline-block; */
+	float: left;
 	padding-top:33.333333%;
-	background: $grey0;
+	/* background: $grey0; */
+	position: relative
+}
+
+
+
+
+@media screen and (max-width: 400px){
+	.fitSquareContainer{
+		display: block;
+		width:50%!important;
+		padding-top: 50%!important;
+		background: blue!important;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.fitSquareContainer{
+		display: block;
+		width:33.33333333%!important;
+		padding-top: 33.33333333%!important;
+		background: blue!important;
+	}
+	.fitSquareContainer3{
+	width:100% ;
+	/* display: inline-block; */
+	float: left;
+	padding-top:100%;
+	/* background: $grey0; */
+	position: relative
+}
+
 
 }
 
-@media screen and (max-width: 600){
+
+@media screen and (max-width: 900px){
 	.fitSquareContainer{
 		display: block;
-		width:100%;
-		padding-top: 100%;
+		width:25%!important;
+		padding-top: 25%!important;
 		background: blue!important;
 	}
 }

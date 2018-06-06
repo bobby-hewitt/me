@@ -4,7 +4,12 @@
 	align-items: center;
 	justify-content: center;
 	background:transparent;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   path {
+
   /* transition:fill 0.3s ease; */
     fill:$grey3;
   fill-opacity: 0;

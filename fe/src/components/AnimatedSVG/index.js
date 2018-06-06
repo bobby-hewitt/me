@@ -14,7 +14,9 @@ class SVG extends Component {
 		}
 	}
 
+
 	componentDidMount(){
+		
 		if(!this.props.autoAnimate){
 			let elem = {
 				ref: this.refs.container,
@@ -38,13 +40,15 @@ class SVG extends Component {
 	}
 
 	animateIn(){
-		console.log('animating in')
+		
 		let path = this.refs.svg
-		path.style.transition = path.style.transition ='fill-opacity 0.3s ease,stroke-dashoffset 10s ease';
-		path.style.strokeDashoffset = '0';
-		setTimeout(() => {
-			this.setState({isFull: true})	
-		},2000)	
+		if (path){
+			path.style.transition = path.style.transition ='fill-opacity 0.3s ease,stroke-dashoffset 10s ease';
+			path.style.strokeDashoffset = '0';
+			setTimeout(() => {
+				this.setState({isFull: true})	
+			},2000)	
+		}
 		
 	}
 

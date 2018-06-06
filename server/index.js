@@ -29,21 +29,171 @@ mongoose.connection.on('connected', function() {
 let PORT = process.env.PORT || 9000
 app.listen(PORT, () => console.log('Example app listening on port ' + PORT))
 
-app.get('/get-my-data', (req, res, next) => {
+
+app.get('/homedata', (req, res, next) => {
+	Me.findOne({name: 'me'}, function(err, me){
+		let itemsToSend = {}
+		if (!err){
+			itemsToSend.lastTrack = me.lastTrack
+	      	itemsToSend.tracks = me.tracks
+	      	itemsToSend.movesLines = me.movesLines
+	      	itemsToSend.movesPlaces = me.movesPlaces
+	      	itemsToSend.movesActivity = me.movesActivity
+      		res.send(itemsToSend)
+      	}
+
+
+	})
+})
+
+// getHomeData()
+setInterval(() => {
+	getHomeData()
+}, 1000 * 60 * 60 * 12)
+
+function getHomeData(){
 	console.log('getting data')
 	Me.findOne({name: 'me'}, function(err, me){
 		if (err) return console.log('No user found')
 		let promises = [getSpotifyData(me), getMovesData(me)]
 		Promise.all(promises).then((responses) => {
-			res.send(responses)
+			processAndSaveHomeData(responses, me)
 		}).catch((err) => {
-			res.send({})
+			console.log(err)
 		})
 	})
-})
+}
+
+function processAndSaveHomeData(response, me){
+	let itemsToSave = {}
+	if (response[0] && response[0].items && response[0].items.length > 1){
+      let item = findFirstPreview(response[0].items)
+      itemsToSave.lastTrack = item
+      itemsToSave.tracks = response[0].items
+    }
+    if (response[1]){
+      const movesData = response[1]
+      processMovesData(movesData).then((d) => {
+
+      	itemsToSave.movesLines = d[0].lines
+      	itemsToSave.movesPlaces = d[0].places
+      	itemsToSave.movesActivity = d[1]
+      	saveMe(itemsToSave, me)
+        console.log('moves success')
+        // console.log(itemsToSave)
+      })
+    } 
+}
 
 
+function saveMe(items, me){
+	let keys = Object.keys(items)
+	for (var i = 0; i < keys.length; i++){
+		if (items[keys[i]]){
+			me[keys[i]] = items[keys[i]]
+		}
+	}
+	me.save(function(){
+		console.log('me saved')
+		console.log(me)
+	})
+}
 
+function findFirstPreview(items){
+	for (var i =0; i < items.length; i++){
+	  // console.log(items[0])
+	  if (items[i].track.preview_url && items[i].track.preview_url.length){
+	    return items[i]
+	  }
+	}
+}
+
+const processMovesData = (l) => {
+	return new Promise((resolve, reject) => {
+		let itterable = [getLines(l), getSummary(l)]
+		Promise.all(itterable).then((data) => {
+			resolve(data)
+		})
+
+		// getLines(l).then((data) => {
+		// 	resolve(data)
+		// })
+		// .catch((err) => {
+		// 	reject(err)
+		// })
+		
+	})
+}
+
+function getSummary(l){
+	let obj = {}
+
+	return new Promise((resolve, reject) => {
+		for (var i = 0 ; i < l.length; i++){
+			let summary = l[i].summary
+
+			if (summary && summary.length){
+				for (var j =0; j < summary.length; j++){
+					if (obj[summary[j].activity]){
+						
+						obj[summary[j].activity].duration += l[i].summary[j].duration
+						obj[summary[j].activity].distance += l[i].summary[j].distance
+						if (summary[j].activity === "walking" || summary[j].activity === "running"){
+							obj[summary[j].activity].steps += l[i].summary[j].steps	
+						}
+					} else {
+						obj[summary[j].activity] = {}
+						obj[summary[j].activity].duration = l[i].summary[j].duration
+						obj[summary[j].activity].distance = l[i].summary[j].distance
+						if (summary[j].activity === "walking" || summary[j].activity === "running"){
+							obj[summary[j].activity].steps = l[i].summary[j].steps
+						}
+					}
+				}
+			}
+		}
+		
+		resolve(obj)
+	})
+}
+
+function getLines(l){
+	return new Promise((resolve, reject) => {
+		let lines = []
+ 		let places = []
+ 		// let highLng, lowLng, highLat, lowLat
+ 		// let bounds = new this.props.google.maps.LatLngBounds();
+		for (var i = 0 ; i < l.length; i++){
+			let date = l[i]
+			if (date && date.segments){
+				for (var j = 0; j < date.segments.length; j++){
+					let segment = date.segments[j]
+					if (segment.type === 'place'){
+						places.push({lat: segment.place.location.lat, lng: segment.place.location.lon})
+					}
+					if (segment.type === 'move'){
+						for (var k = 0; k< segment.activities.length;k++){
+							let d = createLineArr(segment.activities[k])
+							lines = lines.concat(d)
+						}
+					}
+				}
+			}
+		}
+		// this.setMapBounds()
+		resolve({
+			lines, places
+		})
+	})
+}
+
+function createLineArr(a){
+	let trackPoints = []
+	for (var i =0; i < a.trackPoints.length; i++){	
+		trackPoints.push({lat: a.trackPoints[i].lat, lng: a.trackPoints[i].lon})	
+	}
+	return trackPoints
+}
 
 function refreshMovesToken(response, me){
 	return new Promise((resolve, reject) => {
@@ -90,8 +240,6 @@ function getMovesData(me){
 		})
 
 	})
-	
-
 }
 
 function callMovesAPI(me){
@@ -109,10 +257,6 @@ function callMovesAPI(me){
 	})
 	
 }
-
-
-
-
 
 function getSpotifyData(me){
 	return new Promise((resolve, reject) => {

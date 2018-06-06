@@ -7,10 +7,22 @@ main{
 body{
 	background:$grey0;
 	overflow: scroll;
-	height:210000px;
+	/* height:210000px; */
 }
 
 .section{
 	/* padding:100px 0; */
 	width:100%;
+}
+
+.clearfix{
+	clear:both;
+}
+
+.light{
+	font-weight:light!important;
+}
+
+.bold{
+	font-weight:bold!important;
 }

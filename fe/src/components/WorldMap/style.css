@@ -1,9 +1,9 @@
 .world{
 	vertical-align: center;
+	margin-bottom:-20px;
 	svg path{
-		color:red;
-		stroke:$grey3;
-		fill:$grey1;
+		stroke:#3c3c3c;
+		fill:#1b1b1b;
 		/* fill:blue; */
 		transition: all 0.3s ease;
 		&.isVisited{
@@ -34,6 +34,6 @@
 }
 
 .world svg{
-
+background:#000000;
 }
 

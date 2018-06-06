@@ -1,7 +1,7 @@
 export {default as NavBar} from './NavBar';
 export {default as AnimatedBars} from './AnimatedBars';
 export {default as ClickCanvas} from './ClickCanvas';
-export {default as LastFM} from './LastFM';
+export {default as RecentSongs} from './RecentSongs';
 export {default as TitleSection} from './TitleSection';
 export {default as Hero} from './Hero';
 export {default as AnimatedSVG} from './AnimatedSVG';
@@ -10,3 +10,4 @@ export {default as Music} from './Music';
 export {default as FitSquare} from './FitSquare';
 export {default as WorldMap} from './WorldMap';
 export {default as Loader} from './Loader';
+export {default as Activity} from './Activity';
